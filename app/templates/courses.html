@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero-section pt-4 pt-lg-5">
+    <div class="container">
+        <div class="hero-banner reveal">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <div class="eyebrow mb-3">
+                        <i class="bi bi-rocket-takeoff-fill"></i>
+                        Каталог курсов
+                    </div>
+                    <h1 class="hero-title mb-3">
+                        Изучай цифровые навыки на платформе, которая выглядит как продукт, а не как лаба.
+                    </h1>
+                    <p class="hero-subtitle mb-0">
+                        Один тестовый курс уже готов: теория, практика, прогресс и демо-вердикт по отправке решения.
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="hero-stat-grid">
+                        <div class="stat-card glass-card">
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">курс сейчас</span>
+                        </div>
+                        <div class="stat-card glass-card">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">блока внутри</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar glass-card reveal">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-7">
+                    <div class="search-shell">
+                        <i class="bi bi-search"></i>
+                        <input type="search" class="form-control" id="courseSearch" placeholder="Найти курс по названию или тегу">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="filter-chips">
+                        <button type="button" class="filter-chip active" data-filter="all">Все</button>
+                        <button type="button" class="filter-chip" data-filter="python">Python</button>
+                        <button type="button" class="filter-chip" data-filter="flask">Flask</button>
+                        <button type="button" class="filter-chip" data-filter="backend">Backend</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1" id="coursesGrid"></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/courses.js') }}"></script>
+{% endblock %}

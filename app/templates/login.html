@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="container">
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-6">
+                <div class="hero-card reveal">
+                    <div class="eyebrow">
+                        <i class="bi bi-stars"></i>
+                        Новый взгляд на онлайн-обучение
+                    </div>
+                    <h1 class="display-5 fw-black mb-3">
+                        Заходи в платформу и учись в визуале, который хочется скроллить.
+                    </h1>
+                    <p class="hero-text mb-4">
+                        Один вход — и у тебя под рукой курсы, прогресс, теория, практика и понятный путь прохождения.
+                    </p>
+
+                    <div class="feature-stack">
+                        <div class="feature-chip"><i class="bi bi-lightning-charge-fill"></i> Быстрый старт</div>
+                        <div class="feature-chip"><i class="bi bi-layers-fill"></i> Теория + практика</div>
+                        <div class="feature-chip"><i class="bi bi-graph-up-arrow"></i> Трекинг прогресса</div>
+                    </div>
+
+                    <div class="hero-orb hero-orb--small"></div>
+                    <div class="hero-orb hero-orb--medium"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="auth-card glass-card reveal">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <p class="section-kicker mb-2">Авторизация</p>
+                            <h2 class="section-title mb-0">Войти или создать аккаунт</h2>
+                        </div>
+                        <span class="badge rounded-pill text-bg-info-subtle border border-info-subtle">Demo UI</span>
+                    </div>
+
+                    <div class="role-selector mb-4" id="roleSelector">
+                        <button class="role-option active" type="button" data-role="student">
+                            <i class="bi bi-person-workspace"></i>
+                            <span>Ученик</span>
+                        </button>
+                        <button class="role-option" type="button" data-role="teacher">
+                            <i class="bi bi-easel2-fill"></i>
+                            <span>Учитель</span>
+                        </button>
+                    </div>
+
+                    <ul class="nav nav-pills auth-tabs mb-4" id="authTabs">
+                        <li class="nav-item">
+                            <button class="nav-link active" type="button" data-target="loginPane">Вход</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" type="button" data-target="registerPane">Регистрация</button>
+                        </li>
+                    </ul>
+
+                    <div id="loginPane" class="auth-pane active">
+                        <form id="loginForm" class="vstack gap-3">
+                            <input type="hidden" name="role" id="loginRole" value="student">
+                            <div>
+                                <label class="form-label">Email</label>
+                                <div class="input-shell">
+                                    <i class="bi bi-envelope"></i>
+                                    <input class="form-control form-control-lg" type="email" name="email" placeholder="student@itmo.ru" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label">Пароль</label>
+                                <div class="input-shell">
+                                    <i class="bi bi-lock"></i>
+                                    <input class="form-control form-control-lg" type="password" name="password" placeholder="••••••••" required>
+                                </div>
+                            </div>
+                            <button class="btn btn-gradient btn-lg w-100" type="submit">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                Войти
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="registerPane" class="auth-pane">
+                        <form id="registerForm" class="vstack gap-3">
+                            <input type="hidden" name="role" id="registerRole" value="student">
+                            <div>
+                                <label class="form-label">Имя пользователя</label>
+                                <div class="input-shell">
+                                    <i class="bi bi-person"></i>
+                                    <input class="form-control form-control-lg" type="text" name="username" placeholder="your_nickname" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label">Email</label>
+                                <div class="input-shell">
+                                    <i class="bi bi-at"></i>
+                                    <input class="form-control form-control-lg" type="email" name="email" placeholder="me@itmo.ru" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label">Пароль</label>
+                                <div class="input-shell">
+                                    <i class="bi bi-shield-lock"></i>
+                                    <input class="form-control form-control-lg" type="password" name="password" placeholder="Придумай пароль" required>
+                                </div>
+                            </div>
+                            <button class="btn btn-gradient btn-lg w-100" type="submit">
+                                <i class="bi bi-person-plus me-2"></i>
+                                Создать аккаунт
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="mini-note mt-4">
+                        Пока это frontend-demo: данные сохраняются в localStorage, а не в настоящей БД.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

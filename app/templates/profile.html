@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="profile-section">
+    <div class="container">
+        <div class="profile-head glass-card reveal">
+            <div class="profile-avatar-wrap">
+                <div class="profile-avatar">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+            </div>
+            <div>
+                <p class="section-kicker mb-2">Личный кабинет</p>
+                <h1 class="section-title mb-2" id="profileName">Гость</h1>
+                <p class="text-secondary mb-0" id="profileMeta">Войди в аккаунт, чтобы сохранять свои курсы и прогресс.</p>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+            <div class="col-lg-4">
+                <div class="glass-card stat-panel reveal">
+                    <div class="mini-stat">
+                        <span class="mini-stat__label">Роль</span>
+                        <span class="mini-stat__value" id="profileRole">guest</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-stat__label">Курсов записано</span>
+                        <span class="mini-stat__value" id="profileCoursesCount">0</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-stat__label">Практик решено</span>
+                        <span class="mini-stat__value" id="profileSolvedCount">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="glass-card reveal">
+                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                        <div>
+                            <p class="section-kicker mb-2">Мои курсы</p>
+                            <h2 class="section-title mb-0">Карточки записанных курсов</h2>
+                        </div>
+                        <a href="{{ url_for('pages.courses_page') }}" class="btn btn-outline-light rounded-pill px-4">
+                            Смотреть каталог
+                        </a>
+                    </div>
+
+                    <div class="row g-4" id="profileCoursesGrid"></div>
+
+                    <div class="empty-state mt-3 d-none" id="profileEmptyState">
+                        <i class="bi bi-journal-richtext"></i>
+                        <h3>Пока нет записанных курсов</h3>
+                        <p>Запишись хотя бы на один курс, и он появится здесь в виде красивой карточки.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}
