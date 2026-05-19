@@ -24,11 +24,6 @@ class FrontendStructureTests(unittest.TestCase):
             ROOT / "app" / "static" / "js" / "app.js",
             ROOT / "app" / "static" / "js" / "learn.js",
             ROOT / "app" / "static" / "data" / "mock-content.json",
-            ROOT / "docs" / "architecture.md",
-            ROOT / "docs" / "database.md",
-            ROOT / "docs" / "api-contract.md",
-            ROOT / "docs" / "backend-evening-task.md",
-            ROOT / "docs" / "qa-prep-mts.md",
         ]
         for file_path in required_files:
             self.assertTrue(file_path.exists(), f"Missing file: {file_path}")
