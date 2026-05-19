@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="learn-section">
+    <div class="container">
+        <div id="learnRoot" class="reveal"></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/learn.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="container">
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-6">
+                <div class="hero-card reveal">
+                    <div class="eyebrow"><i class="bi bi-stars"></i> Старт демо-платформы</div>
+                    <h1 class="hero-title mt-4 mb-3">Войди как студент или преподаватель.</h1>
+                    <p class="hero-text mb-4">Сейчас авторизация работает на localStorage: этого достаточно для frontend MVP. Позже формы можно заменить запросами на Flask backend.</p>
+                    <div class="feature-stack">
+                        <span class="feature-chip"><i class="bi bi-person-check-fill"></i> Student flow</span>
+                        <span class="feature-chip"><i class="bi bi-mortarboard-fill"></i> Teacher role</span>
+                        <span class="feature-chip"><i class="bi bi-shield-lock-fill"></i> Auth-ready UI</span>
+                    </div>
+                    <div class="auth-preview mt-5">
+                        <div class="preview-row"><span>POST /api/auth/login</span><strong>200 OK</strong></div>
+                        <div class="preview-row"><span>GET /api/profile/courses</span><strong>ready</strong></div>
+                        <div class="preview-row"><span>POST /api/submissions</span><strong>demo</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="auth-card glass-card reveal">
+                    <div class="auth-tabs" role="tablist">
+                        <button class="auth-tab active" type="button" data-auth-mode="login">Вход</button>
+                        <button class="auth-tab" type="button" data-auth-mode="register">Регистрация</button>
+                    </div>
+
+                    <div class="role-switch mt-4">
+                        <button type="button" class="role-option active" data-role="student"><i class="bi bi-backpack-fill"></i><span>Ученик</span></button>
+                        <button type="button" class="role-option" data-role="teacher"><i class="bi bi-easel2-fill"></i><span>Учитель</span></button>
+                    </div>
+
+                    <form id="authForm" class="auth-form mt-4">
+                        <div class="input-shell register-only d-none">
+                            <i class="bi bi-person-fill"></i>
+                            <input class="form-control" type="text" id="usernameInput" placeholder="Имя пользователя" autocomplete="username">
+                        </div>
+                        <div class="input-shell">
+                            <i class="bi bi-envelope-fill"></i>
+                            <input class="form-control" type="email" id="emailInput" placeholder="student@itmo.ru" autocomplete="email" required>
+                        </div>
+                        <div class="input-shell">
+                            <i class="bi bi-key-fill"></i>
+                            <input class="form-control" type="password" id="passwordInput" placeholder="Пароль" autocomplete="current-password" required minlength="4">
+                        </div>
+                        <button class="btn btn-gradient w-100 rounded-pill py-3" type="submit" id="authSubmitButton">Войти</button>
+                    </form>
+
+                    <div class="teacher-note d-none mt-4" id="teacherNote">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <span>Для роли учителя позже появится создание курса. Сейчас роль сохраняется только в интерфейсе.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}
