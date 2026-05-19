@@ -4,57 +4,35 @@
 <section class="profile-section">
     <div class="container">
         <div class="profile-head glass-card reveal">
-            <div class="profile-avatar-wrap">
-                <div class="profile-avatar">
-                    <i class="bi bi-person-circle"></i>
-                </div>
+            <div class="profile-avatar"><i class="bi bi-person-fill"></i></div>
+            <div class="profile-info">
+                <span class="section-kicker"><i class="bi bi-stars"></i> Профиль</span>
+                <h1 class="section-title mt-3 mb-2" id="profileName">Гость</h1>
+                <p class="mb-0" id="profileMeta">demo@local</p>
             </div>
+            <div class="profile-stats">
+                <div class="stat-panel"><span id="profileRole">Student</span><small>роль</small></div>
+                <div class="stat-panel"><span id="profileCoursesCount">0</span><small>курсов</small></div>
+                <div class="stat-panel"><span id="profileSolvedCount">0</span><small>accepted</small></div>
+            </div>
+        </div>
+
+        <div class="section-head reveal">
             <div>
-                <p class="section-kicker mb-2">Личный кабинет</p>
-                <h1 class="section-title mb-2" id="profileName">Гость</h1>
-                <p class="text-secondary mb-0" id="profileMeta">Войди в аккаунт, чтобы сохранять свои курсы и прогресс.</p>
+                <span class="section-kicker"><i class="bi bi-collection-play-fill"></i> Мои курсы</span>
+                <h2 class="section-title mt-3">Продолжай обучение</h2>
             </div>
+            <a href="{{ url_for('pages.courses_page') }}" class="btn btn-outline-light rounded-pill px-4">В каталог</a>
         </div>
 
-        <div class="row g-4 mt-1">
-            <div class="col-lg-4">
-                <div class="glass-card stat-panel reveal">
-                    <div class="mini-stat">
-                        <span class="mini-stat__label">Роль</span>
-                        <span class="mini-stat__value" id="profileRole">guest</span>
-                    </div>
-                    <div class="mini-stat">
-                        <span class="mini-stat__label">Курсов записано</span>
-                        <span class="mini-stat__value" id="profileCoursesCount">0</span>
-                    </div>
-                    <div class="mini-stat">
-                        <span class="mini-stat__label">Практик решено</span>
-                        <span class="mini-stat__value" id="profileSolvedCount">0</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="glass-card reveal">
-                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                        <div>
-                            <p class="section-kicker mb-2">Мои курсы</p>
-                            <h2 class="section-title mb-0">Карточки записанных курсов</h2>
-                        </div>
-                        <a href="{{ url_for('pages.courses_page') }}" class="btn btn-outline-light rounded-pill px-4">
-                            Смотреть каталог
-                        </a>
-                    </div>
-
-                    <div class="row g-4" id="profileCoursesGrid"></div>
-
-                    <div class="empty-state mt-3 d-none" id="profileEmptyState">
-                        <i class="bi bi-journal-richtext"></i>
-                        <h3>Пока нет записанных курсов</h3>
-                        <p>Запишись хотя бы на один курс, и он появится здесь в виде красивой карточки.</p>
-                    </div>
-                </div>
-            </div>
+        <div id="profileEmptyState" class="empty-state glass-card reveal d-none">
+            <i class="bi bi-moon-stars-fill"></i>
+            <h3>Ты пока не записан ни на один курс</h3>
+            <p>Открой каталог, выбери тестовый курс и нажми «Записаться».</p>
+            <a href="{{ url_for('pages.courses_page') }}" class="btn btn-gradient rounded-pill px-4">Перейти к курсам</a>
         </div>
+
+        <div class="row g-4" id="profileCoursesGrid"></div>
     </div>
 </section>
 {% endblock %}

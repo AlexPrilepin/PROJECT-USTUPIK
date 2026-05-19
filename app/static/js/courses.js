@@ -1,43 +1,36 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("coursesGrid");
   const searchInput = document.getElementById("courseSearch");
-  const chips = document.querySelectorAll(".filter-chip");
-
-  if (!grid) return;
-
+  const filterButtons = document.querySelectorAll(".filter-chip");
   const data = await window.appHelpers.loadMockContent();
-  const courses = data.courses || [];
+
   let activeFilter = "all";
-  let query = "";
+  let searchValue = "";
+
+  const matchesCourse = (course) => {
+    const haystack = [course.title, course.shortDescription, course.category, course.accent, ...course.tags].join(" ").toLowerCase();
+    const bySearch = haystack.includes(searchValue.toLowerCase());
+    const byFilter = activeFilter === "all" || course.tags.includes(activeFilter);
+    return bySearch && byFilter;
+  };
 
   const renderCourses = () => {
-    const filtered = courses.filter((course) => {
-      const matchesFilter = activeFilter === "all" || course.tags.includes(activeFilter);
-      const normalizedQuery = query.trim().toLowerCase();
-      const haystack = [
-        course.title,
-        course.shortDescription,
-        course.category,
-        ...(course.tags || [])
-      ].join(" ").toLowerCase();
-      const matchesQuery = !normalizedQuery || haystack.includes(normalizedQuery);
-      return matchesFilter && matchesQuery;
-    });
+    const courses = data.courses.filter(matchesCourse);
 
-    if (!filtered.length) {
+    if (!courses.length) {
       grid.innerHTML = `
         <div class="col-12">
-          <div class="empty-state">
+          <div class="empty-state glass-card reveal-visible">
             <i class="bi bi-search-heart"></i>
             <h3>Ничего не найдено</h3>
-            <p>Попробуй изменить фильтр или поисковый запрос.</p>
+            <p>Попробуй другой запрос или сбрось фильтр.</p>
           </div>
         </div>
       `;
       return;
     }
 
-    grid.innerHTML = filtered.map((course) => {
+    grid.innerHTML = courses.map((course) => {
       const enrolled = window.appHelpers.isEnrolled(course.slug);
       return `
         <div class="col-lg-6">
@@ -47,33 +40,21 @@ document.addEventListener("DOMContentLoaded", async () => {
               <div class="cover-accent">${course.accent}</div>
               <div class="cover-glow"></div>
             </div>
-
             <div class="course-card__body">
-              <div class="d-flex justify-content-between gap-3 flex-wrap mb-3">
-                <div class="course-meta">
-                  <span><i class="bi bi-bar-chart-fill"></i> ${course.difficulty}</span>
-                  <span><i class="bi bi-clock-history"></i> ${course.duration}</span>
-                </div>
-                <div class="course-rating">
-                  <i class="bi bi-star-fill"></i>
-                  ${course.rating}
-                </div>
+              <div class="tag-row mb-3">
+                <span class="soft-tag"><i class="bi bi-bar-chart-fill"></i> ${course.difficulty}</span>
+                <span class="soft-tag"><i class="bi bi-clock-fill"></i> ${course.duration}</span>
+                <span class="soft-tag"><i class="bi bi-star-fill"></i> ${course.rating}</span>
               </div>
-
-              <h3 class="course-card__title">${course.title}</h3>
+              <h2 class="course-card__title">${course.title}</h2>
               <p class="course-card__text">${course.shortDescription}</p>
-
-              <div class="tag-row">
-                ${course.tags.map((tag) => `<span class="soft-tag">#${tag}</span>`).join("")}
-              </div>
-
               <div class="course-card__footer">
                 <div class="course-stats">
-                  <span><i class="bi bi-people-fill"></i> ${course.studentsCount} студентов</span>
+                  <span><i class="bi bi-people-fill"></i> ${course.studentsCount}</span>
                   <span><i class="bi bi-grid-1x2-fill"></i> ${course.modules.length} блока</span>
                 </div>
-                <a href="/courses/${course.slug}" class="btn ${enrolled ? "btn-outline-light" : "btn-gradient"} rounded-pill px-4">
-                  ${enrolled ? "Продолжить" : "Открыть"}
+                <a href="/courses/${course.slug}" class="btn ${enrolled ? "btn-gradient" : "btn-outline-light"} rounded-pill px-4">
+                  ${enrolled ? "Продолжить" : "Подробнее"}
                 </a>
               </div>
             </div>
@@ -83,16 +64,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }).join("");
   };
 
-  searchInput?.addEventListener("input", (event) => {
-    query = event.target.value;
+  searchInput.addEventListener("input", (event) => {
+    searchValue = event.target.value.trim();
     renderCourses();
   });
 
-  chips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      chips.forEach((item) => item.classList.remove("active"));
-      chip.classList.add("active");
-      activeFilter = chip.dataset.filter;
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+      filterButtons.forEach((item) => item.classList.toggle("active", item === button));
       renderCourses();
     });
   });

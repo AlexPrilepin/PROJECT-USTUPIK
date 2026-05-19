@@ -37,9 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <h3 class="course-card__title">${course.title}</h3>
           <p class="course-card__text">${course.shortDescription}</p>
           <div class="course-card__footer">
-            <div class="course-stats">
-              <span><i class="bi bi-grid-1x2-fill"></i> ${course.modules.length} блока</span>
-            </div>
+            <div class="course-stats"><span><i class="bi bi-grid-1x2-fill"></i> ${course.modules.length} блока</span></div>
             <a href="/learn/${course.slug}" class="btn btn-gradient rounded-pill px-4">Открыть</a>
           </div>
         </div>

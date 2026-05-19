@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, redirect, render_template, url_for
 
 pages_bp = Blueprint("pages", __name__)
 
@@ -10,7 +10,7 @@ def root():
 
 @pages_bp.route("/login")
 def login_page():
-    return render_template("login.html", page_title="Авторизация")
+    return render_template("login.html", page_title="Вход")
 
 
 @pages_bp.route("/courses")
@@ -30,4 +30,4 @@ def profile_page():
 
 @pages_bp.route("/learn/<slug>")
 def learn_page(slug: str):
-    return render_template("learn.html", page_title="Прохождение курса", course_slug=slug)
+    return render_template("learn.html", page_title="Курс", course_slug=slug)

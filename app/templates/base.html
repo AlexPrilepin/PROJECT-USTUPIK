@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page_title or "ITMO Course Platform" }} · ITMO Course Platform</title>
-    <meta name="description" content="Современная платформа для онлайн-курсов на Flask">
+    <meta name="description" content="Онлайн-платформа для создания и прохождения курсов на Flask">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,8 +13,8 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body data-page="{{ request.endpoint or '' }}" data-course-slug="{{ course_slug or '' }}">
-    <div class="page-bg page-bg--one"></div>
-    <div class="page-bg page-bg--two"></div>
+    <div class="page-glow page-glow-one"></div>
+    <div class="page-glow page-glow-two"></div>
     <div class="page-grid"></div>
 
     {% include "components/navbar.html" %}
@@ -26,15 +26,13 @@
     {% include "components/footer.html" %}
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="appToast" class="toast glass-card border-0 text-white" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-transparent text-white border-secondary-subtle">
+        <div id="appToast" class="toast app-toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
                 <i class="bi bi-stars me-2 text-info"></i>
                 <strong class="me-auto">ITMO Course Platform</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Закрыть"></button>
             </div>
-            <div class="toast-body" id="appToastBody">
-                Добро пожаловать.
-            </div>
+            <div class="toast-body" id="appToastBody">Готово.</div>
         </div>
     </div>
 
